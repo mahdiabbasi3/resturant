@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>منوی QR کافه</title>
+  <style>
+    body { font-family: tahoma, sans-serif; background: #fafafa; text-align: center; direction: rtl; }
+    .menu { display: flex; flex-wrap: wrap; justify-content: center; margin: 20px; }
+    .item {
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      margin: 15px;
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 220px;
+      transition: 0.2s;
+    }
+    .item:hover { transform: scale(1.05); }
+    img { width: 100%; border-radius: 10px; }
+    h3 { margin: 10px 0 5px; }
+    p { font-size: 14px; color: #555; }
+    strong { display: block; margin-top: 8px; color: #e91e63; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <h1>منوی دیجیتال ☕️</h1>
+  <div class="menu" id="menu"></div>
+
+
+
+
+<script>
+  const sheetUrl = "https://opensheet.elk.sh/1h4iBBAaILKNlKsF-dYkt0etG3JgxOOAVH9sIPlVpjUo/sheet1";
+
+  fetch(sheetUrl)
+    .then(res => res.json())
+    .then(data => {
+      let menuDiv = document.getElementById("menu");
+      data.forEach(row => {
+        menuDiv.innerHTML += `
+          <div class="item">
+            <img src="${row.image}" alt="${row.name}">
+            <h3>${row.name}</h3>
+            <p>${row.description}</p>
+            <strong>${row.price} تومان</strong>
+          </div>;`
+      });
+    });
+</script>
+</body>
+</html>
